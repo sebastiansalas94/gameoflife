@@ -1,0 +1,35 @@
+macro(enableGoogleTest executable_name src_files)
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG release-1.12.1
+    )
+
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+
+    enable_testing()
+
+    file(GLOB_RECURSE test_src_files "../app/tests/src/*.cpp")
+
+	message(${test_src_files})
+	#message(SOURCE_DIR="${source_dirs}")
+	#message(SOURCE_FILES=${${src_files}})
+
+    add_executable(
+        ${executable_name}
+        ${test_src_files}
+    )
+	include_directories(${source_dirs})
+
+    target_link_libraries(
+        ${executable_name}
+        GTest::gtest_main
+		GameOfLifeLib
+    )
+
+    include(GoogleTest)
+    gtest_discover_tests(${executable_name})
+
+endmacro()

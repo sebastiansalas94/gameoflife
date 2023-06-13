@@ -1,0 +1,2 @@
+grid.height=3
+grid.width=3

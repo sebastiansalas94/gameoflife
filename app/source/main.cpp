@@ -1,7 +1,12 @@
 ﻿// (c) Cheva's Game of Life
 #include <iostream>
+#include "core/Facade.h"
+
+using namespace gol::lib::core;
 
 int main()
 {
-  std::cout << "Hello World!";
+	Facade facade = Facade();
+
+	return 0;
 }
